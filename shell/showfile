@@ -1,0 +1,8 @@
+#!/bin/bash
+
+if cat $1>/dev/null; then
+	echo "found file $1"
+else
+	echo "file $1 not found"
+fi
+	
