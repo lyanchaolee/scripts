@@ -1,5 +1,7 @@
 #! /usr/bin/env python
 
+#######personal not related to the company########
+
 critics = {
 	'Lisa Rose':{'Lady in the Water':2.5, 'Snakes on a Plane':3.5, 'Just My Luck':3.0, 
 			'Just My Luck':3.0, 'Superman Returns':3.5, 'You, Me and Dupree':2.5, 
@@ -93,6 +95,37 @@ def topNpearson(p1, n=5, prefs=critics):
 print '**********'*10
 
 print 'TOP 3 Gene Seymour are : ', topNpearson('Gene Seymour',3)
+
+
+def getRecommendations(person, prefs=critics, similarity=sim_pearson):
+	totals = {}
+	simSums = {}
+
+	for other in prefs:
+		if other==person:
+			continue
+		sim = similarity(person, other, prefs)
+		if sim<=0:
+			continue
+
+		for item in prefs[other]:
+			if item not in prefs[person] or prefs[person][item]==0:
+				totals.setdefault(item,0)
+				totals[item]+=prefs[other][item]*sim
+				simSums.setdefault(item,0)
+				simSums[item]+=sim
+		rankings=[(total/simSums[item],item) for item, total in totals.items()]
+		rankings.sort()
+		rankings.reverse()
+
+		return rankings
+
+
+
+print '**********'*10
+
+print 'getRecommendations for Gene Seymour is :', getRecommendations('Jack Matthews')
+
 
 
 	
