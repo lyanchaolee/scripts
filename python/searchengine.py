@@ -18,7 +18,8 @@ class crawler:
 
 
 	def getentryid(self, table, field, value, createnew=True):
-		cur=self.con.execute("select rowid from %s where %s='%s'" % (table,field,value)) res=cur.fetchone()
+		cur=self.con.execute("select rowid from %s where %s='%s'" % (table,field,value)) 
+		res=cur.fetchone()
 		if res==None:
 			cur=self.con.execute("insert into %s (%s) values ('%s')" % (table,field,value))
 			return cur.lastrowid
