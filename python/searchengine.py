@@ -30,7 +30,7 @@ class crawler:
 	def addtoindex(self, url, soup):
 		if self.isindexed(url): 
 			return
-        print 'Indexing '+url
+        print 'Indexing ', url
         # Get the individual words
         text=self.gettextonly(soup)
         words=self.separatewords(text)
