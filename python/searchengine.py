@@ -18,7 +18,7 @@ class crawler:
 
 
 	def getentryid(self, table, field, value, createnew=True):
-		cur=self.con.execute("select rowid from %s where %s='%s'" % (table,field,value)) res=cur.fetchone( )
+		cur=self.con.execute("select rowid from %s where %s='%s'" % (table,field,value)) res=cur.fetchone()
 		if res==None:
 			cur=self.con.execute("insert into %s (%s) values ('%s')" % (table,field,value))
 			return cur.lastrowid
@@ -111,5 +111,5 @@ class crawler:
         self.con.execute('create index wordurlidx on wordlocation(wordid)')
         self.con.execute('create index urltoidx on link(toid)') 
         self.con.execute('create index urlfromidx on link(fromid)') 
-        self.dbcommit( )
+        self.dbcommit()
 
