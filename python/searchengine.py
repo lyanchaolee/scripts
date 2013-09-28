@@ -30,13 +30,10 @@ class crawler:
 	def addtoindex(self, url, soup):
 		if self.isindexed(url): 
 			return
-        print 'Indexing ', url
-        # Get the individual words
+		print 'Indexing ', url
         text=self.gettextonly(soup)
         words=self.separatewords(text)
-        # Get the URL id
         urlid=self.getentryid('urllist','url',url)
-        # Link each word to this url
         for i in range(len(words)):
         	word=words[i]
         	if word in ignorewords: 
@@ -102,15 +99,15 @@ class crawler:
 
 
 	def createindextables(self):
- 		self.con.execute('create table urllist(url)')
-        self.con.execute('create table wordlist(word)')
-        self.con.execute('create table wordlocation(urlid,wordid,location)')
-        self.con.execute('create table link(fromid integer,toid integer)')
-        self.con.execute('create table linkwords(wordid,linkid)')
-        self.con.execute('create index wordidx on wordlist(word)')
-        self.con.execute('create index urlidx on urllist(url)')
-        self.con.execute('create index wordurlidx on wordlocation(wordid)')
-        self.con.execute('create index urltoidx on link(toid)') 
-        self.con.execute('create index urlfromidx on link(fromid)') 
-        self.dbcommit()
+		self.con.execute('create table urllist(url)')
+		self.con.execute('create table wordlist(word)')
+		self.con.execute('create table wordlocation(urlid,wordid,location)')
+		self.con.execute('create table link(fromid integer,toid integer)')
+		self.con.execute('create table linkwords(wordid,linkid)')
+		self.con.execute('create index wordidx on wordlist(word)')
+		self.con.execute('create index urlidx on urllist(url)')
+		self.con.execute('create index wordurlidx on wordlocation(wordid)')
+		self.con.execute('create index urltoidx on link(toid)')
+		self.con.execute('create index urlfromidx on link(fromid)')
+		self.dbcommit()
 
