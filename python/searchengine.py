@@ -31,15 +31,15 @@ class crawler:
 		if self.isindexed(url): 
 			return
 		print 'Indexing ', url
-        text=self.gettextonly(soup)
-        words=self.separatewords(text)
-        urlid=self.getentryid('urllist','url',url)
-        for i in range(len(words)):
-        	word=words[i]
-        	if word in ignorewords: 
-        		continue
-        	wordid=self.getentryid('wordlist','word',word)
-        	self.con.execute("insert into wordlocation(urlid,wordid,location) values (%d,%d,%d)" % (urlid,wordid,i))
+		text=self.gettextonly(soup)
+		words=self.separatewords(text)
+		urlid=self.getentryid('urllist','url',url)
+		for i in range(len(words)):
+			word=words[i]
+			if word in ignorewords: 
+				continue
+			wordid=self.getentryid('wordlist','word',word)
+			self.con.execute("insert into wordlocation(urlid,wordid,location) values (%d,%d,%d)" % (urlid,wordid,i))
 	
 	def gettextonly(self, soup):
 
